@@ -31,7 +31,11 @@
 * Now, copy the `tdata` folder and paste it in the directory: *C:\Users\your_username\AppData\Roaming\Telegram Desktop*. 
 * Before pasting the `tdata` folder, ensure that you have deleted the existing `tdata` folder on your PC.
 
+---
+### Disclaimer :
 
+#### Use this only for educational Purpose.... I am not responsible for your action...Love you Guys.. Stay safe !!! Stay legal !!!
+---
 ## Contact :
 <a href=mailto:swagkarna@gmail.com><img src="https://img.shields.io/badge/Gmail-swagkarna-green?style=for-the-badge" /></a>
 <a href=https://twitter.com/swagkarna><img src="https://img.shields.io/badge/Twitter-@swagkarna-blue?style=for-the-badge" /></a>
