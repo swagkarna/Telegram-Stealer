@@ -4,6 +4,9 @@ echo.
 echo.
 type run.txt
 
+echo.
+echo
+
 echo 1. Install Required Module
 echo 2. Convert ps1 to exe
 
