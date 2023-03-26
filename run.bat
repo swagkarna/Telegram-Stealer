@@ -5,9 +5,6 @@ echo.
 type run.txt
 echo 1. Install Required Module
 echo 2. Convert ps1 to exe
-echo.
-echo
-
 set /p input1="Enter your choice: "
 
 if "%input1%"=="1" (
