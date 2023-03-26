@@ -29,7 +29,7 @@
 
 * After the `tdata` file is uploaded to your webserver. 
 * Download the zip file and extract in your pc. Now copy `tdata` folder and paste on this directory *C:\Users\your_username\AppData\Roaming\Telegram Desktop*
-* Makesure you have installed `telegram desktop application` in your pc and before pasting `tdata` make sure you have deleted `tdata` folder  on your pc 
+* Makesure both victim & you have installed `telegram desktop application` in your pc and before pasting `tdata` make sure you have deleted `tdata` folder  on your pc 
 
 ## Contact :
 <a href=mailto:swagkarna@gmail.com><img src="https://img.shields.io/badge/Gmail-swagkarna-green?style=for-the-badge" /></a>
