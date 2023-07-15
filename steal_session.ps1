@@ -1,4 +1,5 @@
 # Stop and remove Telegram process
+
 $processName = "telegram"
 try {
     if (Get-Process $processName -ErrorAction SilentlyContinue) {
