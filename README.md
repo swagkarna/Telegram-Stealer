@@ -42,10 +42,5 @@
 <a href=https://twitter.com/swagkarna><img src="https://img.shields.io/badge/Twitter-@swagkarna-blue?style=for-the-badge" /></a>
 
 ---
-### ❤️Supporters❤️
-[![Stargazers repo roster for @swagkarna/Defeat-Defender-V1.2.0](https://reporoster.com/stars/swagkarna/Telegram-Stealer)](https://github.com/swagkarna/Telegram-Stealer/stargazers)
 
-[![Forkers repo roster for @swagkarna/Defeat-Defender-V1.2.0](https://reporoster.com/forks/swagkarna/Telegram-Stealer)](Telegram-Stealer)
-
----
 
