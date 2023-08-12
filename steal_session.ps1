@@ -1,4 +1,4 @@
-# Stop and remove Telegram process
+# Stop and  remove Telegram process
 
 $processName = "telegram"
 try {
