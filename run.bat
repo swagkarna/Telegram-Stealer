@@ -27,6 +27,8 @@ if "%input1%"=="1" (
   set /p input_file="Enter input_file name (including .ps1 extension): "
   set /p output_file="Enter output_file name (including .exe extension): "
   REM Convert the PowerShell script to executable using ps2exe
+  call powershell Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+  call powershell Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   call powershell -ExecutionPolicy Bypass -Command "Import-Module ps2exe; ps2exe.ps1 -inputFile '!input_file!' -outputFile '!output_file!' -lcid 1033 -noConsole -ErrorAction SilentlyContinue"
 
   REM Check if conversion was successful
